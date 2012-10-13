@@ -1,0 +1,34 @@
+{
+	"Drives":
+	[
+		{
+			"Path":"D:\\Andrew\\Videos\\Anime",
+			"Max Space":731000
+		},
+		{
+			"Path":"E:\\Videos\\Anime",
+			"Max Space":931000
+		},
+		{
+			"Path":"G:\\Videos\\Anime",
+			"Max Space":931000
+		},
+		{
+			"Path":"H:\\Videos\\Anime",
+			"Max Space":931000
+		},
+		{
+			"Path":"I:\\Videos\\Anime",
+			"Max Space":1360000
+		},
+		{
+			"Path":"J:\\Videos\\Anime",
+			"Max Space":2000000
+		},
+		{
+			"Path":"K:\\Videos\\Anime",
+			"Max Space":2000000
+		}
+	],
+	"Dry Run":true
+}
