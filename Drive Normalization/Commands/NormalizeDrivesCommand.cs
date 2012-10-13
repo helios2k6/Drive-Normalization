@@ -58,19 +58,6 @@ namespace Drive_Normalization.Commands
 			var pooledAvailableItems = new List<IItem<Group>>();
 			var groupToOriginalDriveMap = new Dictionary<Group, Drive>();
 
-			//Add additional folds if necessary
-			//Does not work at the moment because we don't have an interface for the Drive object
-			/*
-			if (t.AdditionalFolders != null && t.AdditionalFolders.Any())
-			{
-				foreach (var k in t.AdditionalFolders)
-				{
-					var group = new Group(k);
-					pooledAvailableItems.Add(new Item<Group>(group, group.Size, group.Size));
-				}
-			}
-			*/
-
 			foreach (var d in drivesOverLimit)
 			{
 				var amountOverLimit = d.CurrentDiskUsage - (long)Math.Round((double)d.MaxAllowedSpace * idealPercentageRatio);

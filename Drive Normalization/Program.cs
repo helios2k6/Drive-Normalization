@@ -42,6 +42,13 @@ namespace Drive_Normalization
 
 			Console.WriteLine("Results:");
 			Console.WriteLine(transactionManager.ToString());
+
+			if (configFile.DryRun) return;
+
+			Console.WriteLine("Moving files");
+
+			var moveCom = new MoveFilesCommand();
+			moveCom.RunCommand(transactionManager);
 		}
 	}
 }

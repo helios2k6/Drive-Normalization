@@ -15,9 +15,6 @@ namespace Drive_Normalization.Model
 		[DataMember(Name = "Drives", IsRequired = true)]
 		public IEnumerable<AggregateDriveCommandArgs> DriveArgs { get; set; }
 
-		[DataMember(Name = "Additional Folders", IsRequired = false)]
-		public IEnumerable<string> AdditionalFolders { get; set; }
-
 		[DataMember(Name = "Dry Run", IsRequired = false)]
 		public bool DryRun { get; set; }
 	}

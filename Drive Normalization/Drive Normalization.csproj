@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Commands\AggregateDrivesCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\MoveFilesCommand.cs" />
     <Compile Include="Commands\NormalizeDrivesCommand.cs" />
     <Compile Include="Commands\PrintHelpCommand.cs" />
     <Compile Include="Commands\ReadConfigurationFileCommand.cs" />
