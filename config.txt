@@ -3,11 +3,11 @@
 	[
 		{
 			"Path":"D:\\Andrew\\Videos\\Anime",
-			"Max Space":731000
+			"Max Space":400000
 		},
 		{
 			"Path":"E:\\Videos\\Anime",
-			"Max Space":931000
+			"Max Space":631000
 		},
 		{
 			"Path":"G:\\Videos\\Anime",
@@ -30,5 +30,5 @@
 			"Max Space":2000000
 		}
 	],
-	"Dry Run":true
+	"Dry Run":false
 }

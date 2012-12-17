@@ -22,7 +22,7 @@ namespace Drive_Normalization.Model
 		public override string ToString()
 		{
 			var builder = new StringBuilder();
-			builder.Append(string.Format("From drive {0} to drive {1}", FromDrive, ToDrive)).AppendLine();
+			builder.Append(string.Format("From drive {0} to drive {1} ", FromDrive, ToDrive)).AppendLine();
 			foreach (var g in GroupsTransfered)
 			{
 				builder.Append("Send: " + g).AppendLine();

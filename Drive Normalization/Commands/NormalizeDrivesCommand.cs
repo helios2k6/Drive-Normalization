@@ -51,7 +51,7 @@ namespace Drive_Normalization.Commands
 								   where !drivesOverLimit.Contains(n)
 								   select n).ToList();
 
-			if (drivesUnderLimit.Any()) return new DriveTransactionManager();
+			if (!drivesUnderLimit.Any()) return new DriveTransactionManager();
 			
 			//Translate our group to IItems<Group> and pool them here
 			var solver = new ZeroOneKnapsackSolver<Group>();
