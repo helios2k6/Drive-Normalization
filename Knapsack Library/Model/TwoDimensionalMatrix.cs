@@ -9,9 +9,35 @@ namespace Knapsack_Library.Model
 {
 	internal class TwoDimensionalMatrix<T>
 	{
+		private class InternalLazySortedList<T, K>
+		{
+			private List<KeyValuePair<T, K>> _internalList = new List<KeyValuePair<T, K>>();
+			private bool _needsToBeSorted = false;
+
+			private void SortIfNecessary()
+			{
+				if (!_needsToBeSorted) return;
+				_needsToBeSorted = false;
+				_internalList.Sort((x, y) => Comparer<T>.Default.Compare(x.Key, y.Key));
+			}
+
+			public K this[T t]
+			{
+				get
+				{
+					SortIfNecessary();
+					throw new NotImplementedException();
+				}
+				set
+				{
+				}
+			}
+		}
+
 		private readonly SortedList<long, SortedList<long, T>> _weightMatrix = new SortedList<long, SortedList<long, T>>();
 		private long _virtualRowCount;
 		private long _virtualColCount;
+		private bool _isDirty;
 
 		public IEnumerable GetEnumerable()
 		{
