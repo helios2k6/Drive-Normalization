@@ -9,7 +9,7 @@ namespace Knapsack_Library.Model
 {
 	internal class TwoDimensionalMatrix<T>
 	{
-		private readonly SortedList<long, SortedList<long, T>> _weightMatrix = new SortedList<long, SortedList<long, T>>();
+		private readonly IDictionary<long, IDictionary<long, T>> _weightMatrix = new Dictionary<long, IDictionary<long, T>>();
 		private long _virtualRowCount;
 		private long _virtualColCount;
 		private bool _isDirty;
@@ -30,10 +30,10 @@ namespace Knapsack_Library.Model
 				//Check col count
 				if (_virtualColCount <= j) _virtualColCount = j + 1;
 
-				SortedList<long, T> row;
+				IDictionary<long, T> row;
 				if (!_weightMatrix.TryGetValue(i, out row))
 				{
-					row = new SortedList<long, T>();
+					row = new Dictionary<long, T>();
 					_weightMatrix[i] = row;
 				}
 
