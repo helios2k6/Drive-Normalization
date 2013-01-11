@@ -70,9 +70,6 @@
     <Report>
       <Path>Drive Normalization121217.vsp</Path>
     </Report>
-    <Report>
-      <Path>Drive Normalization121217(1).vsp</Path>
-    </Report>
   </Reports>
   <Launches>
     <ProjBinary>

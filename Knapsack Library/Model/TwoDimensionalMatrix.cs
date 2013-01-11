@@ -12,7 +12,6 @@ namespace Knapsack_Library.Model
 		private readonly IDictionary<long, IDictionary<long, T>> _weightMatrix = new Dictionary<long, IDictionary<long, T>>();
 		private long _virtualRowCount;
 		private long _virtualColCount;
-		private bool _isDirty;
 
 		public IEnumerable GetEnumerable()
 		{
@@ -21,7 +20,16 @@ namespace Knapsack_Library.Model
 
 		public T this[long i, long j]
 		{
-			get { return (_weightMatrix.ContainsKey(i) && _weightMatrix[i].ContainsKey(j)) ? _weightMatrix[i][j] : default(T); }
+			get 
+			{
+				IDictionary<long, T> matrixRow;
+				T rowValue;
+				if (_weightMatrix.TryGetValue(i, out matrixRow) && matrixRow.TryGetValue(j, out rowValue))
+				{
+					return rowValue;
+				}
+				return default(T);
+			}
 			set
 			{
 				//Check row count
