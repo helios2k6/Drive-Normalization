@@ -10,78 +10,28 @@ namespace Drive_Normalization.Commands
 {
 	public class MoveFilesCommand : ICommand<DriveTransactionManager>
 	{
-		private interface TransactionVisitor
+		private static void TransferFolder(string sourceFolder, string destFolder)
 		{
-			void Visit(FileTransaction transaction);
-			void Visit(FolderTransaction transaction);
-		}
-
-		private class FileVisitor : TransactionVisitor
-		{
-			public void Visit(FileTransaction transaction)
+			//If destination folder does not exist, create it
+			if (!Directory.Exists(destFolder))
 			{
-				switch (transaction.TransactionType)
-				{
-					case TransactionType.Copy:
-						File.Copy(transaction.SrcFile, transaction.DestFile);
-						break;
-					case TransactionType.Delete:
-						File.Delete(transaction.SrcFile);
-						break;
-					default:
-						throw new ArgumentOutOfRangeException();
-				}
+				Console.WriteLine(string.Format("\tDirectory {0} does not exist. Creating it", destFolder));
+				Directory.CreateDirectory(destFolder);
 			}
 
-			public void Visit(FolderTransaction transaction)
+			var filesInSourceDirectory = Directory.EnumerateFiles(sourceFolder);
+
+			//Move all files from source folder
+			foreach (var f in filesInSourceDirectory)
 			{
-				switch (transaction.TransactionType)
-				{
-					case TransactionType.Create:
-						Directory.CreateDirectory(transaction.Folder);
-						break;
-					case TransactionType.Delete:
-						Directory.Delete(transaction.Folder);
-						break;
-					default:
-						throw new ArgumentOutOfRangeException();
-				}
+				var fullDestPath = Path.Combine(destFolder, Path.GetFileName(f));
+				Console.WriteLine(string.Format("\tMoving file from: {0} to {1}", f, fullDestPath));
+				File.Move(f, fullDestPath);
 			}
-		}
 
-		private enum TransactionType
-		{
-			Create,
-			Copy,
-			Delete,
-		}
-
-		private abstract class Transaction
-		{
-			public TransactionType TransactionType { get; set; }
-
-			public abstract void Accept(TransactionVisitor visitor);
-		}
-
-		private class FileTransaction : Transaction
-		{
-			public string SrcFile { get; set; }
-			public string DestFile { get; set; }
-
-			public override void Accept(TransactionVisitor visitor)
-			{
-				visitor.Visit(this);
-			}
-		}
-
-		private class FolderTransaction : Transaction
-		{
-			public string Folder { get; set; }
-
-			public override void Accept(TransactionVisitor visitor)
-			{
-				visitor.Visit(this);
-			}
+			//Delete old directory
+			Console.WriteLine("Deleting directory {0}", sourceFolder);
+			Directory.Delete(sourceFolder);
 		}
 
 		public void RunCommand(DriveTransactionManager transManager)
@@ -92,6 +42,7 @@ namespace Drive_Normalization.Commands
 				{
 					var newFilePath = Path.Combine(t.ToDrive.DrivePath, k.Name);
 					Console.WriteLine(string.Format("Moving folder {0} to folder {1}", k.GroupPath, newFilePath));
+					TransferFolder(k.GroupPath, newFilePath);
 				}
 			}
 		}

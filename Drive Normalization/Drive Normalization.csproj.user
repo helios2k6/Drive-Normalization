@@ -3,4 +3,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartArguments>"D:\Andrew\Documents\Programming Projects\C-Sharp\Drive Normalization\config.txt"</StartArguments>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <StartArguments>"D:\Andrew\Documents\Programming Projects\C-Sharp\Drive Normalization\config.txt"</StartArguments>
+  </PropertyGroup>
 </Project>

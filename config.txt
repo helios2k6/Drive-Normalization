@@ -30,5 +30,5 @@
 			"Max Space":2000000
 		}
 	],
-	"Dry Run":true
+	"Dry Run":false
 }

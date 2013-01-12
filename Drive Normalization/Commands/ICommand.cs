@@ -13,6 +13,6 @@ namespace Drive_Normalization.Commands
 
 	public interface ICommand<T, K> : ICommand<T>
 	{
-		K RunCommand(T t);
+		new K RunCommand(T t);
 	}
 }
