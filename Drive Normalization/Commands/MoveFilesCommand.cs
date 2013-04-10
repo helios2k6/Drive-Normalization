@@ -10,6 +10,18 @@ namespace Drive_Normalization.Commands
 {
 	public class MoveFilesCommand : ICommand<DriveTransactionManager>
 	{
+		private static string GetFolderName(string folder)
+		{
+			if (string.IsNullOrWhiteSpace(folder)) return string.Empty;
+
+			var indexOfLastSeparator = folder.LastIndexOf(Path.DirectorySeparatorChar);
+			var indexOfLastAltSeparator = folder.LastIndexOf(Path.AltDirectorySeparatorChar);
+
+			var largerIndex = indexOfLastSeparator > indexOfLastAltSeparator ? indexOfLastSeparator : indexOfLastAltSeparator;
+
+			return largerIndex + 1 >= folder.Length ? GetFolderName(folder.Substring(0, folder.Length - 1)) : folder.Substring(largerIndex + 1);
+		}
+
 		private static void TransferFolder(string sourceFolder, string destFolder)
 		{
 			//If destination folder does not exist, create it
@@ -17,6 +29,19 @@ namespace Drive_Normalization.Commands
 			{
 				Console.WriteLine(string.Format("\tDirectory {0} does not exist. Creating it", destFolder));
 				Directory.CreateDirectory(destFolder);
+			}
+
+			//Check to see if there are any folders in this directory. If there are, then move them first
+			var foldersInSourceDirectory = Directory.GetDirectories(sourceFolder);
+
+			if (foldersInSourceDirectory.Any())
+			{
+				Console.WriteLine(string.Format("\tProcessing subdirectories of {0}", sourceFolder));
+				foreach (var f in foldersInSourceDirectory)
+				{
+					var folderNameOnly = GetFolderName(f);
+					TransferFolder(f, Path.Combine(destFolder, folderNameOnly));
+				}
 			}
 
 			var filesInSourceDirectory = Directory.EnumerateFiles(sourceFolder);

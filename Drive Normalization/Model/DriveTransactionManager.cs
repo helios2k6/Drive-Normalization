@@ -58,8 +58,8 @@ namespace Drive_Normalization.Model
 			var builder = new StringBuilder();
 
 			var orderedTable = from n in _transactionTable
-							   orderby n.FromDrive.DrivePath
-							   select n;
+									 orderby n.FromDrive.DrivePath
+									 select n;
 
 			if (!orderedTable.Any()) return "No Results";
 
