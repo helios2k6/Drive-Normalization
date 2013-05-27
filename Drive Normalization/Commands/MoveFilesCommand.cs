@@ -61,14 +61,21 @@ namespace Drive_Normalization.Commands
 
 		public void RunCommand(DriveTransactionManager transManager)
 		{
+			var moveAmounts = new List<long>();
 			foreach (var t in transManager.TransactionTable)
 			{
 				foreach (var k in t.GroupsTransfered)
 				{
+					moveAmounts.Add(k.Size);
+
 					var newFilePath = Path.Combine(t.ToDrive.DrivePath, k.Name);
 					Console.WriteLine(string.Format("Moving folder {0} to folder {1}", k.GroupPath, newFilePath));
 					TransferFolder(k.GroupPath, newFilePath);
 				}
+			}
+			if (moveAmounts.Any())
+			{
+				Console.WriteLine(string.Format("Total amount moved: {0} MB", moveAmounts.Average()));
 			}
 		}
 	}

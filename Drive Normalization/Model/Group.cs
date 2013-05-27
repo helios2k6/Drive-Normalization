@@ -16,6 +16,9 @@ namespace Drive_Normalization.Model
 
 		public string Name { get; private set; }
 		public string GroupPath { get; private set; }
+		/// <summary>
+		/// Size in Megabytes
+		/// </summary>
 		public long Size { get { return _size.Value; } }
 		public IEnumerable<string> Files { get { return _files.Value; } }
 
