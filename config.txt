@@ -2,10 +2,6 @@
 	"Drives":
 	[
 		{
-			"Path":"D:\\Andrew\\Videos\\Anime",
-			"Max Space":400000
-		},
-		{
 			"Path":"E:\\Videos\\Anime",
 			"Max Space":631000
 		},

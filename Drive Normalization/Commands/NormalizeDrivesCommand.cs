@@ -95,7 +95,7 @@ namespace Drive_Normalization.Commands
 			return transactionManager;
 		}
 
-		public void ICommand<NormalizeDrivesCommandArgs>.RunCommand(NormalizeDrivesCommandArgs t)
+		void ICommand<NormalizeDrivesCommandArgs>.RunCommand(NormalizeDrivesCommandArgs t)
 		{
 			throw new NotImplementedException();
 		}

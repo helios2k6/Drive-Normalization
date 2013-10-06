@@ -21,7 +21,6 @@ namespace Drive_Normalization.Commands
 				var deserializer = new DataContractJsonSerializer(typeof(ConfigFile));
 				var result = deserializer.ReadObject(inputStream) as ConfigFile;
 
-				inputStream.Close();
 				return result;
 			}
 		}
