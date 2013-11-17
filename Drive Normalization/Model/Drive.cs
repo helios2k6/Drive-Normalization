@@ -34,6 +34,14 @@ namespace Drive_Normalization.Model
 			visitor.Visit(_groups);
 		}
 
+		public override int GetHashCode()
+		{
+			return DrivePath.GetHashCode()
+				^ MaxAllowedSpace.GetHashCode()
+				^ CurrentDiskUsage.GetHashCode()
+				^ Groups.Aggregate(13, (agg, item) => agg ^ item.GetHashCode());
+		}
+
 		public override bool Equals(object obj)
 		{
 			if (object.ReferenceEquals(obj, null)) return false;
