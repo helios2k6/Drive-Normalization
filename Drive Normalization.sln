@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drive Normalization", "Drive Normalization\Drive Normalization.csproj", "{A4855DE7-412B-42A0-9DEF-4ED49EB4933E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Knapsack Library", "Knapsack Library\Knapsack Library.csproj", "{FEC179A1-EA72-4510-9336-1B39F2E366BD}"

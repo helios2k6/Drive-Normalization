@@ -14,15 +14,13 @@ namespace Knapsack_Library.Commands
 			var resultMatrix = new TwoDimensionalMatrix<long>();
 			var keepMatrix = new TwoDimensionalMatrix<bool>();
 
-			var weightArray = (from w in items select w.Weight).ToList();
-			var valueArray = (from v in items select v.Value).ToList();
-
 			var itemCount = items.Count;
 
 			for (var i = 1; i <= itemCount; i++)
 			{
-				var weightAtIndex = weightArray[i - 1];
-				var valueAtIndex = valueArray[i - 1];
+				var weightAtIndex = items[i - 1].Weight;
+				var valueAtIndex = items[i - 1].Value;
+
 				for (var w = 0; w <= maxWeight; w++)
 				{
 					var newValue = valueAtIndex + resultMatrix[i - 1, w - weightAtIndex];
@@ -47,7 +45,7 @@ namespace Knapsack_Library.Commands
 				if (keepMatrix[i, upperBound])
 				{
 					defaultSack.AddItem(items[i - 1]);
-					upperBound -= weightArray[i - 1];
+					upperBound -= items[i - 1].Weight;
 				}
 			}
 

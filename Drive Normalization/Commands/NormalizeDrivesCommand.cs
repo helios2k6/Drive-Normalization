@@ -18,15 +18,6 @@ namespace Drive_Normalization.Commands
 		/// <summary>
 		/// Attempts to normalize the amount of space on each drive. 
 		/// </summary>
-		/// <remarks>
-		/// The algorithm for normalizing the drives is as follows:
-		/// 
-		/// Let N = the amount of files each drive should have (the normalized value)
-		/// Let D = set of all drives, D' = set of all drives above N, D" = set of all drives below N
-		/// 
-		/// 
-		/// 
-		/// </remarks>
 		/// <param name="t">Command args</param>
 		/// <returns>A list of actions to execute in order</returns>
 		public DriveTransactionManager RunCommand(NormalizeDrivesCommandArgs t)
@@ -36,7 +27,7 @@ namespace Drive_Normalization.Commands
 
 			var idealPercentageRatio = totalAmountOfTakenSpace / totalAmountOfAvailableSpace;
 			
-			var drivesOverLimit = new List<Drive>();
+			var drivesOverLimit = new HashSet<Drive>();
 			foreach (var k in t.Drives)
 			{
 				var drivePercentage = (double)k.CurrentDiskUsage / (double)k.MaxAllowedSpace;
@@ -47,9 +38,10 @@ namespace Drive_Normalization.Commands
 				}
 			}
 
-			var drivesUnderLimit = (from n in t.Drives
-								   where !drivesOverLimit.Contains(n)
-								   select n).ToList();
+			var drivesUnderLimit = 
+				(from n in t.Drives
+				 where !drivesOverLimit.Contains(n)
+				 select n).ToList();
 
 			if (!drivesUnderLimit.Any()) return new DriveTransactionManager();
 			
