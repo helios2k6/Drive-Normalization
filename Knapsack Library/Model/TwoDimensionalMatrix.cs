@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Knapsack_Library.Model
 {
-	internal class TwoDimensionalMatrix<T>
+	internal sealed class TwoDimensionalMatrix<T>
 	{
 		private readonly IDictionary<long, IDictionary<long, T>> _weightMatrix = new Dictionary<long, IDictionary<long, T>>();
 		private long _virtualRowCount;
